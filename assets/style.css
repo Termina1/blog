@@ -1,0 +1,105 @@
+:root {
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Merriweather', 'Times New Roman', Times, serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.container > header {
+  font-size: 1.875rem;
+  line-height: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.note-item {
+  margin: 1.865rem 0;
+}
+
+.note-item .note-item__date {
+ display: block;
+ font-size: 0.83333rem;
+ font-weight: 300;
+ font-style: italic;
+ color: #666666;
+ margin-top: 0.25rem;
+ margin-bottom: 0.5rem;
+}
+
+.note-item .note-item__preview {
+  font-weight: 300;
+}
+
+.note-item .note-item__preview p, .note-item .note-item__preview ul {
+  margin: 1rem 0;
+}
+
+.note-item .note-item__preview p:first-child {
+  margin-top: 0;
+}
+
+.note-item .note-item__preview p:last-child {
+  margin-bottom: 0;
+}
+
+.note-item .note-item__more-icon {
+  position: relative;
+  top: 3px;
+  display: none;
+  margin-left: 5px;
+}
+
+.note-item .note-item__more:hover .note-item__more-icon {
+  display: inline;
+}
+
+.note-item .note-item__title {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+.note-item .note-item__title a:hover {
+  text-decoration: underline;
+}
+
+.note-item .note-item__more {
+  display: inline-block;
+  font-size: 1rem;
+  margin-top: 0.365rem;
+}
+
+.icon {
+  width: 16px;
+  height: 16px;
+}
+
+.top-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.top-menu .top-menu__item {
+  margin: 0 30px;
+  font-size: 1.2rem;
+}
+
+.top-menu .top-menu__item:hover a {
+  text-decoration: underline;
+}
