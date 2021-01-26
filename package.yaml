@@ -39,13 +39,15 @@ dependencies:
 - directory
 - fast-logger
 - unix
-- markdown
+- mmark
 - text
-- parsec
 - http-media
 - feed
 - bytestring
 - network-uri
+- megaparsec
+- lucid
+- containers
 
 library:
   source-dirs: src

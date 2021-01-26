@@ -33,6 +33,7 @@ renderList :: ContextEnv -> [Note] -> Html
 renderList env notes = H.section ! class_ "notes-list" $ foldMap (renderEntry env) notes
 
 renderFull :: ContextEnv -> Note -> Html
-renderFull env note = H.article ! class_ "note-item" $ do
+renderFull env note = H.article ! class_ "note-item note-item_full" $ do
   h1 ! class_ "note-item__title" $ (toHtml $ M.title note)
-  p ! class_ "note-item__preview" $ (toHtml $ M.fullText note)
+  H.time ! class_ "note-item__date" ! datetime (fromString $ iso8601Show $ created note) $ (fromString $ unsafePerformIO $ humanReadableTime $ created note)
+  H.div ! class_ "note-item__preview" $ (toHtml $ M.fullText note)

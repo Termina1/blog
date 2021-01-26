@@ -26,6 +26,7 @@ library
   exposed-modules:
       API
       App
+      AppEnv
       Data.Config
       Data.Context
       Data.Log
@@ -56,6 +57,7 @@ library
     , blaze-markup
     , blaze-svg
     , bytestring
+    , containers
     , datetime
     , directory
     , exceptions
@@ -65,10 +67,11 @@ library
     , friendly-time
     , hedis
     , http-media
-    , markdown
+    , lucid
+    , megaparsec
+    , mmark
     , mtl
     , network-uri
-    , parsec
     , servant
     , servant-blaze
     , servant-server
@@ -93,6 +96,7 @@ executable nblog-exe
     , blaze-markup
     , blaze-svg
     , bytestring
+    , containers
     , datetime
     , directory
     , exceptions
@@ -102,11 +106,12 @@ executable nblog-exe
     , friendly-time
     , hedis
     , http-media
-    , markdown
+    , lucid
+    , megaparsec
+    , mmark
     , mtl
     , nblog
     , network-uri
-    , parsec
     , servant
     , servant-blaze
     , servant-server

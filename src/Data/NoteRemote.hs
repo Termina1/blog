@@ -17,12 +17,15 @@ import System.Directory (listDirectory)
 import Data.Maybe (catMaybes)
 import System.Posix.Files (FileStatus, getFileStatus, modificationTime)
 import Data.Time.Clock.POSIX (posixSecondsToUTCTime)
-import Data.Text.Lazy (Text, pack)
-import Text.Parsec.String (Parser)
-import Text.Parsec as P (manyTill, many, anyToken, string, runParser, try)
+import Data.Text (Text, pack)
 import Data.Bifunctor (first)
-import Text.Markdown (markdown, defaultMarkdownSettings)
-import Text.Blaze.Html (Html)
+import Text.MMark as MM (render, parse, MMark(..), MMarkErr)
+import Lucid.Base (renderText)
+import Text.Blaze.Html (Html, preEscapedToHtml)
+import Text.Megaparsec as MP (ParseErrorBundle, Parsec, takeWhileP, try, parse, chunk, manyTill, anySingle, takeRest, fancyFailure, ErrorFancy(ErrorFail))
+import Data.Set (singleton)
+
+type Parser = Parsec String String
 
 class (Monad m) => MonadNoteRemote m where
   getNoteByNameRemote :: String -> m (Either String (Maybe Note))
@@ -48,16 +51,21 @@ instance MonadNoteRemote App where
 createNote :: String -> Either IOError FileStatus -> Either IOError String -> Either String (Maybe Note)
 createNote name statusE textE = do
   text <- first show textE
-  (title, previewText, fullText) <- first show $ runParser noteParser () name text
+  (title, previewText, fullText) <- first show $ MP.parse noteParser name text
   status <- first show statusE
   let created = posixSecondsToUTCTime $ realToFrac $ modificationTime status
   return $ Just $ Note{..}
 
+mmarkToHtml :: Either (ParseErrorBundle Text MMarkErr) MMark -> Parser Html
+mmarkToHtml mmark = case mmark of
+  Left err -> fancyFailure (singleton $ ErrorFail ("cannot parse markdown" ++ (show err)))
+  Right doc -> return $ preEscapedToHtml $ renderText $ render doc
+
 noteParser :: Parser (String, Html, Html)
 noteParser = do
-  title <- manyTill anyToken (P.try $ P.string "===")
-  preview <- manyTill anyToken (P.try $ P.string "\n\n_____\n\n")
-  rest <- many anyToken
-  let peviewM = markdown defaultMarkdownSettings (pack preview)
-  let restM = markdown defaultMarkdownSettings (pack rest)
+  title <- manyTill anySingle (MP.try $ chunk "===")
+  preview <- manyTill anySingle (MP.try $ chunk "\n\n___\n\n")
+  rest <- takeRest
+  peviewM <- mmarkToHtml $ MM.parse "preview" (pack preview)
+  restM <- mmarkToHtml $ MM.parse "rest" (pack rest)
   return (title, peviewM, (peviewM <> restM))

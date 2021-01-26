@@ -16,7 +16,7 @@ mkAppEnv = do
     let ttl = 3600
     let senv = ServerEnv "localhost:8080/" "http:"
     let authorEnv = AuthorEnv "Viacheslav Shebanov" "terminal2010@gmail.com"
-    let blogEnv = BlogEnv "ML Journey"
+    let blogEnv = BlogEnv "Software Decay"
     pure Env{..}
 
 startApp :: IO ()
