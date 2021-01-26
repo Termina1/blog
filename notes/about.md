@@ -1,7 +1,7 @@
 Обо мне
 ===
 
-![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/67c571bb-a0ae-46e1-bac3-738107341a76/Untitled.png](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/67c571bb-a0ae-46e1-bac3-738107341a76/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT73L2G45O3KS52Y5%2F20210126%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20210126T223240Z&X-Amz-Expires=86400&X-Amz-Signature=5fa6ab97b5f269bc9bc2f5573cf737f37e6d24b87c3569a5558dcbc5dbb16eba&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22)
+![мое фото](/assets/me.png)
 
 ___
 
