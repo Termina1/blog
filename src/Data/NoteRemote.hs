@@ -16,6 +16,7 @@ import System.Directory (listDirectory)
 import Data.Maybe (catMaybes)
 import System.Posix.Files (FileStatus, getFileStatus)
 import Renderers.Markdown (createNote)
+import Data.List (sortOn)
 
 class (Monad m) => MonadNoteRemote m where
   getNoteByNameRemote :: String -> m (Either String (Maybe Note))
@@ -33,7 +34,10 @@ instance MonadNoteRemote App where
     folder <- getNotesFolder
     files <- liftIO $ listDirectory folder
     let filesFiltered = filter (\el -> (takeBaseName el) /= "about") files
-    fmap (fmap catMaybes) $ fmap (sequence) $ mapM (getNoteByNameRemote . takeBaseName) filesFiltered
+    result <- fmap (fmap catMaybes) $ fmap (sequence) $ mapM (getNoteByNameRemote . takeBaseName) filesFiltered
+    case result of
+      Right arr -> return $ Right $ reverse $ sortOn created arr
+      _ -> return result
 
 -- notFoundNote :: Either IOError String -> Either String String
 -- notFoundNote err = if isDoesNotExistError err then Right Nothing else Left (show err)
