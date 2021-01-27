@@ -48,6 +48,8 @@ dependencies:
 - megaparsec
 - lucid
 - containers
+- modern-uri
+- lens
 
 library:
   source-dirs: src

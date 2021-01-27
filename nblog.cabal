@@ -38,6 +38,7 @@ library
       Models
       Renderers.Context
       Renderers.Layout
+      Renderers.Markdown
       Renderers.Note
       RSS
       Server
@@ -67,9 +68,11 @@ library
     , friendly-time
     , hedis
     , http-media
+    , lens
     , lucid
     , megaparsec
     , mmark
+    , modern-uri
     , mtl
     , network-uri
     , servant
@@ -106,9 +109,11 @@ executable nblog-exe
     , friendly-time
     , hedis
     , http-media
+    , lens
     , lucid
     , megaparsec
     , mmark
+    , modern-uri
     , mtl
     , nblog
     , network-uri

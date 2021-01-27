@@ -60,6 +60,22 @@ a {
   margin: 0 auto;
 }
 
+.note-item .note-item__preview iframe {
+  border: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.note-item .note-item__preview .iframe-container {
+  overflow: hidden;
+  /* 16:9 aspect ratio */
+  padding-top: 56.25%;
+  position: relative;
+}
+
 .note-item .note-item__more-icon {
   position: relative;
   top: 3px;
