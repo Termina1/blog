@@ -52,8 +52,7 @@ library
   hs-source-dirs:
       src
   build-depends:
-      aeson
-    , base >=4.7 && <5
+      base >=4.7 && <5
     , blaze-html
     , blaze-markup
     , blaze-svg
@@ -94,8 +93,7 @@ executable nblog-exe
       app
   ghc-options: -threaded -rtsopts -with-rtsopts=-N
   build-depends:
-      aeson
-    , base
+      base
     , blaze-html
     , blaze-markup
     , blaze-svg
