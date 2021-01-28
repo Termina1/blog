@@ -11,7 +11,7 @@ import Data.Bifunctor (first)
 import Text.MMark as MM (render, parse, MMark(..), MMarkErr, useExtension)
 import qualified Lucid.Base as L
 import Text.Blaze.Html (Html, preEscapedToHtml)
-import Text.Megaparsec as MP (ParseErrorBundle, Parsec, takeWhileP, try, parse, chunk, manyTill, anySingle, takeRest, fancyFailure, ErrorFancy(ErrorFail))
+import Text.Megaparsec as MP (ParseErrorBundle, Parsec, takeWhileP, try, parse, chunk, manyTill, anySingle, takeRest, fancyFailure, ErrorFancy(ErrorFail), single)
 import Text.MMark.Extension (inlineRender, Inline, Extension, Inline(Link), asPlainText)
 import qualified Data.List.NonEmpty as NL
 import Lucid.Html5 (iframe_, width_, height_, src_, div_, class_)
@@ -24,13 +24,15 @@ import Models (Note(..))
 import System.Posix.Files (FileStatus, modificationTime)
 import Data.Set (singleton)
 import Data.Time.Clock.POSIX (posixSecondsToUTCTime)
+import qualified Replace.Megaparsec as RM
+
 
 type Parser = Parsec String String
 
 createNote :: String -> Either IOError FileStatus -> Either IOError String -> Either String (Maybe Note)
 createNote name statusE textE = do
   text <- first show textE
-  (title, previewText, fullText) <- first show $ MP.parse noteParser name text
+  (title, previewText, fullText) <- first show $ MP.parse noteParser name (preprocess text)
   status <- first show statusE
   let created = posixSecondsToUTCTime $ realToFrac $ modificationTime status
   return $ Just $ Note{..}
@@ -49,7 +51,16 @@ noteParser = do
   restM <- mmarkToHtml $ MM.parse "rest" (pack rest)
   return (title, peviewM, (peviewM <> restM))
 
+linkReplacer :: Parser String
+linkReplacer = do
+  single '['
+  link <- manyTill anySingle (single ']')
+  single '('
+  link2 <- manyTill anySingle (single ')')
+  if link == link2 then return link else fancyFailure (singleton $ ErrorFail (""))
 
+preprocess :: String -> String
+preprocess text = RM.streamEdit linkReplacer (\e -> "<" ++ e ++ ">") text
 youtubeRender :: (Inline -> L.Html ()) -> Inline -> L.Html ()
 youtubeRender f i@(Link inner uri Nothing) = case S.indices "youtube.com" (U.render uri) of
   [] -> f i

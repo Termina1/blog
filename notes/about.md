@@ -13,7 +13,7 @@ ___
 
 Активнее всего я в твиттере. Но есть и другие ссылки:
 
-- Twitter: [http://twitter.com/thoughtsync](http://twitter.com/thought_sync)
+- Twitter: [http://twitter.com/thought_sync](http://twitter.com/thought_sync)
 - Linkedin: [https://www.linkedin.com/in/vyacheslav-shebanov-40763541/](https://www.linkedin.com/in/vyacheslav-shebanov-40763541/)
 - Github: [https://github.com/Termina1](https://github.com/Termina1)
 - Почта: [terminal2010@gmail.com](mailto:terminal2010@gmail.com)
@@ -38,7 +38,7 @@ ___
 
 Выступление на Science Slam Digital про то, как мы меняли VK. Начинается с 1:02:00.
 
-[https://vk.com/videos-148745938?z=video-148745938456239017%2Fclub148745938%2Fpl-148745938-2](https://vk.com/videos-148745938?z=video-148745938_456239017%2Fclub148745938%2Fpl_-148745938_-2)
+[https://vk.com/videos-148745938?z=video-148745938_456239017%2Fclub148745938%2Fpl_-148745938_-2](https://vk.com/videos-148745938?z=video-148745938_456239017%2Fclub148745938%2Fpl_-148745938_-2)
 
 **Чем выше заберешься, тем больнее падать, 2016**
 

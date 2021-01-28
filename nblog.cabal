@@ -75,6 +75,7 @@ library
     , modern-uri
     , mtl
     , network-uri
+    , replace-megaparsec
     , servant
     , servant-blaze
     , servant-server
@@ -117,6 +118,7 @@ executable nblog-exe
     , mtl
     , nblog
     , network-uri
+    , replace-megaparsec
     , servant
     , servant-blaze
     , servant-server

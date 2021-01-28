@@ -28,4 +28,4 @@ ___
 
 На этом, пожалуй, введение закончилось. Хотелось бы, чтобы у меня получилось добавлять сюда статьи как можно чаще. Пожелайте мне удачи.
 
-Сам блог лежи тут: [https://github.com/Termina1/blog](https://github.com/Termina1/blog). А если хочется со мной связаться, то можно писать сюда: [http://twitter.com/thoughtsync](http://twitter.com/thought_sync).
+Сам блог лежи тут: [https://github.com/Termina1/blog](https://github.com/Termina1/blog). А если хочется со мной связаться, то можно писать сюда: [http://twitter.com/thought_sync](http://twitter.com/thought_sync).

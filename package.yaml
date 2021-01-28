@@ -50,6 +50,7 @@ dependencies:
 - containers
 - modern-uri
 - lens
+- replace-megaparsec
 
 library:
   source-dirs: src
