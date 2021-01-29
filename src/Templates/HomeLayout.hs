@@ -21,6 +21,7 @@ render env value = docTypeHtml $ do
     H.link ! A.rel "stylesheet" ! href "https://cdn.jsdelivr.net/npm/modern-css-reset/dist/reset.min.css"
     H.link ! A.rel "stylesheet" ! href "https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap"
     H.link ! A.rel "stylesheet" ! href "/assets/style.css"
+    H.link ! A.rel "alternate" ! A.type_ "application/rss+xml" ! A.title "Soft Decay RSS" ! href "/rss"
 
   body $ do
     H.div ! class_ "container" $ do
