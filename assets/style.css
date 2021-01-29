@@ -43,6 +43,13 @@ a {
   font-weight: 300;
 }
 
+.note-item .note-item__preview pre {
+  overflow: auto;
+  background: rgb(246, 248, 250);
+  padding: 16px;
+  border-radius: 6px;
+}
+
 .note-item .note-item__preview p, .note-item .note-item__preview ul {
   margin: 1rem 0;
 }
