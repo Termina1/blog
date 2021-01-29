@@ -50,6 +50,7 @@ dependencies:
 - modern-uri
 - lens
 - replace-megaparsec
+- yaml
 
 library:
   source-dirs: src
