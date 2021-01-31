@@ -1,1 +1,1 @@
-sudo systemctl restart blog.service
+git pull origin main && sudo systemctl restart blog.service
