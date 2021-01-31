@@ -29,7 +29,7 @@ render env value = docTypeHtml $ do
       header $ do
         H.div $ do
           H.menu ! class_ "top-menu" $ do
-            li ! class_ "top-menu__item" $ a ! href (showLink (senv env) aboutLink) $ "Обо мне lalala"
+            li ! class_ "top-menu__item" $ a ! href (showLink (senv env) aboutLink) $ "Обо мне lal"
             li ! class_ "top-menu__item" $ a ! href (showLink (senv env) homeLink) $ "Блог"
             li ! class_ "top-menu__item" $ a ! href (showLink (senv env) rssLink) $ "RSS"
         h1 $ a ! href (showLink (senv env) homeLink) $ fromString $ "<" ++ (blogName $ blogEnv env) ++ ">"

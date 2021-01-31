@@ -26,7 +26,7 @@ import Data.ByteString.Lazy.Char8 (pack)
 import Data.Aeson (Value, encode)
 import Text.Hex (encodeHex)
 import Data.Text as TT (unpack)
-import System.Process (shell, createProcess)
+import System.Process (shell, readCreateProcess)
 import Control.Monad.IO.Class (MonadIO(..))
 
 withContext :: (MonadConfig m) => a -> m (Context a)
@@ -72,6 +72,8 @@ handleUpdate (Just sig) body = do
   if sig /= ("sha256=" ++ dataSig)
     then throwError $ err403 { errBody = "Incorrect signature" }
     else do
-      liftIO $ createProcess $ shell "./restart.sh &"
+      logT "Updating application"
+      out <- liftIO $ readCreateProcess (shell "./restart.sh &") ""
+      logT ("Result: " ++ out)
       return NoContent
 handleUpdate Nothing body = throwError $ err403 { errBody = "Incorrect signature" }
