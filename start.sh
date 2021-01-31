@@ -1,0 +1,1 @@
+$(stack path --local-install-root)/bin/nblog-exe

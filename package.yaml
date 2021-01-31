@@ -54,6 +54,7 @@ dependencies:
 - cryptohash-sha256
 - aeson
 - hex-text
+- process
 
 library:
   source-dirs: src

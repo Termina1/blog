@@ -26,6 +26,8 @@ import Data.ByteString.Lazy.Char8 (pack)
 import Data.Aeson (Value, encode)
 import Text.Hex (encodeHex)
 import Data.Text as TT (unpack)
+import System.Process (shell, createProcess)
+import Control.Monad.IO.Class (MonadIO(..))
 
 withContext :: (MonadConfig m) => a -> m (Context a)
 withContext a = do
@@ -69,5 +71,7 @@ handleUpdate (Just sig) body = do
   let dataSig = TT.unpack $ encodeHex $ hmaclazy secret (pack body)
   if sig /= ("sha256=" ++ dataSig)
     then throwError $ err403 { errBody = "Incorrect signature" }
-    else return NoContent
+    else do
+      liftIO $ createProcess $ shell "./restart.sh &"
+      return NoContent
 handleUpdate Nothing body = throwError $ err403 { errBody = "Incorrect signature" }
