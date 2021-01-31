@@ -16,6 +16,9 @@ import Control.Monad.Reader (ReaderT, MonadReader, runReaderT)
 import Data.Kind (Type)
 import Servant.Server (Handler, ServerError)
 import Control.Monad.Except (ExceptT, MonadError(..), runExceptT)
+import Data.ByteString (ByteString)
+import Data.ByteString (ByteString)
+import Servant.API.ContentTypes
 
 data ServerEnv = ServerEnv {
   domain :: String,
@@ -36,7 +39,8 @@ data Env (m :: Type -> Type) = Env {
   ttl :: !(Int),
   senv :: !(ServerEnv),
   authorEnv :: !(AuthorEnv),
-  blogEnv :: !(BlogEnv)
+  blogEnv :: !(BlogEnv),
+  secret :: !(ByteString)
 }
 
 type AppEnv = Env App

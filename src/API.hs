@@ -1,5 +1,8 @@
-{-# LANGUAGE DataKinds       #-}
-{-# LANGUAGE TypeOperators   #-}
+{-# LANGUAGE DataKinds #-}
+{-# LANGUAGE TypeOperators #-}
+{-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module API
   (
@@ -13,7 +16,8 @@ module API
     homeLink,
     aboutLink,
     rssLink,
-    absoluteURI
+    absoluteURI,
+    TJson
   ) where
 
 import Servant
@@ -25,14 +29,31 @@ import App (ServerEnv(..))
 import Data.Context as RC
 import RSS
 import Network.URI (URIAuth(..))
+import Data.ByteString.Lazy (ByteString)
+import Data.Aeson (Value)
+import Data.ByteString.Lazy.Char8 (pack, unpack)
+import qualified Network.HTTP.Media as M
+
+data TJson
+
+instance Accept TJson where
+  contentType _ = "application" M.// "json"
+
+instance MimeRender TJson String where
+  mimeRender _ a = pack a
+
+instance MimeUnrender TJson String where
+  mimeUnrender _ a = Right $ unpack a
 
 type IndexR = Get '[HTML] (RC.Context (Layout [Note]))
 type NoteR = "notes" :> Capture "name" String :> Get '[HTML] (RC.Context (Layout Note))
 type AboutR = "about" :> Get '[HTML] (RC.Context (Layout Note))
 type RssR = "rss" :> Get '[RSS] (RC.Context [Note])
+type UpdateR = "update" :> Header "X-Hub-Signature-256" String :> ReqBody '[TJson] String :> Post '[JSON] NoContent
 
-type API = IndexR :<|> NoteR :<|> AboutR :<|> RssR
+type API = IndexR :<|> NoteR :<|> AboutR :<|> RssR :<|> UpdateR
 type WithAssets = API :<|> ("assets" :> Raw)
+
 
 serverWithAssets :: Proxy WithAssets
 serverWithAssets = Proxy

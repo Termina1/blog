@@ -7,17 +7,25 @@ module ServerHandlers
     showAllNotes,
     showAboutMe,
     showAllNotesLayout,
+    handleUpdate,
     Layout(..)
   ) where
 
 import Models (Note)
 import Data.NoteRemote (MonadNoteRemote(..))
 import Data.Log (MonadLog(..))
-import Data.Config (MonadConfig(getServerEnv, getAuthorEnv, getBlogEnv))
+import Data.Config (MonadConfig(getServerEnv, getAuthorEnv, getBlogEnv, getSecret))
 import Control.Monad.Except (MonadError(..))
-import Servant.Server (ServerError, errBody, err404, err500)
+import Servant.Server (ServerError, errBody, err404, err500, err403)
 import Renderers.Layout (Layout(..))
 import Data.Context (Context(..), ContextEnv(..))
+import Servant (NoContent(..))
+import Crypto.Hash.SHA256 (hmaclazy)
+import Data.ByteString.Char8 (unpack)
+import Data.ByteString.Lazy.Char8 (pack)
+import Data.Aeson (Value, encode)
+import Text.Hex (encodeHex)
+import Data.Text as TT (unpack)
 
 withContext :: (MonadConfig m) => a -> m (Context a)
 withContext a = do
@@ -54,3 +62,12 @@ showAllNotesLayout = do
 showAboutMe :: (MonadNoteRemote m, MonadLog m, MonadError ServerError m, MonadConfig m) => m (Context (Layout Note))
 showAboutMe = do
   showNote "about"
+
+handleUpdate :: (MonadLog m, MonadError ServerError m, MonadConfig m) => Maybe String -> String -> m NoContent
+handleUpdate (Just sig) body = do
+  secret <- getSecret
+  let dataSig = TT.unpack $ encodeHex $ hmaclazy secret (pack body)
+  if sig /= ("sha256=" ++ dataSig)
+    then throwError $ err403 { errBody = "Incorrect signature" }
+    else return NoContent
+handleUpdate Nothing body = throwError $ err403 { errBody = "Incorrect signature" }

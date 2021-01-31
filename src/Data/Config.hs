@@ -5,6 +5,7 @@ module Data.Config
 
 import App (App, Env(..), ServerEnv, AuthorEnv, BlogEnv)
 import Control.Monad.Reader (ask)
+import Data.ByteString (ByteString)
 
 class (Monad m) => MonadConfig m where
   getTtl :: m Int
@@ -12,6 +13,7 @@ class (Monad m) => MonadConfig m where
   getServerEnv :: m ServerEnv
   getAuthorEnv :: m AuthorEnv
   getBlogEnv :: m BlogEnv
+  getSecret :: m ByteString
 
 instance MonadConfig App where
   getTtl = ask >>= \env -> return $ ttl env
@@ -19,3 +21,4 @@ instance MonadConfig App where
   getServerEnv = ask >>= \env -> return $ senv env
   getAuthorEnv = ask >>= \env -> return $ authorEnv env
   getBlogEnv = ask >>= \env -> return $ blogEnv env
+  getSecret = ask >>= \env -> return $ secret env

@@ -51,6 +51,9 @@ dependencies:
 - lens
 - replace-megaparsec
 - yaml
+- cryptohash-sha256
+- aeson
+- hex-text
 
 library:
   source-dirs: src

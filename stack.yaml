@@ -41,6 +41,8 @@ packages:
 extra-deps:
 - wai-make-assets-0.2@sha256:c27822194ab5f203edbc51270c8e796af4e5172023ffde68ff479e715bde75c1,2028
 - datetime-0.3.1@sha256:7e275bd0ce7a2f66445bedfa0006abaf4d41af4c2204c3f8004c17eab5480e74,1534
+- hex-text-0.1.0.2@sha256:154df2b81c1dd38b055fa6a90cb6964f60c5cf4a0ba633ea929d8a79af89519a,1301
+- base16-bytestring-1.0.1.0@sha256:33b9d57afa334d06485033e930c6b13fc760baf88fd8f715ae2f9a4b46e19a54,2641
 
 # Override default flag values for local packages and extra-deps
 # flags: {}

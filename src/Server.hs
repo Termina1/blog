@@ -9,7 +9,7 @@ import Servant.Server.StaticFiles (serveDirectoryWebApp)
 import Servant
 import App (AppEnv, App, runApp)
 import Models (Note)
-import ServerHandlers (showAllNotes, showNote, showAboutMe, showAllNotesLayout)
+import ServerHandlers (showAllNotes, showNote, showAboutMe, showAllNotesLayout, handleUpdate)
 import API (WithAssets, API, serverWithAssets)
 import Renderers.Note
 
@@ -21,6 +21,7 @@ apiServer = showAllNotesLayout
   :<|> showNote
   :<|> showAboutMe
   :<|> showAllNotes
+  :<|> handleUpdate
 
 server :: AppEnv -> Server WithAssets
 server env = hoistServer
