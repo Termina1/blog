@@ -73,7 +73,7 @@ handleUpdate (Just sig) body = do
     then throwError $ err403 { errBody = "Incorrect signature" }
     else do
       logT "Updating application"
-      out <- liftIO $ readCreateProcess (shell "./restart.sh &") ""
+      out <- liftIO $ readCreateProcess (shell "nohup ./restart.sh &") ""
       logT ("Result: " ++ out)
       return NoContent
 handleUpdate Nothing body = throwError $ err403 { errBody = "Incorrect signature" }
