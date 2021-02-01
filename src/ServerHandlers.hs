@@ -28,6 +28,7 @@ import Text.Hex (encodeHex)
 import Data.Text as TT (unpack)
 import System.Process (shell, readCreateProcess)
 import Control.Monad.IO.Class (MonadIO(..))
+import Control.Concurrent.Async (async)
 
 withContext :: (MonadConfig m) => a -> m (Context a)
 withContext a = do
@@ -65,15 +66,19 @@ showAboutMe :: (MonadNoteRemote m, MonadLog m, MonadError ServerError m, MonadCo
 showAboutMe = do
   showNote "about"
 
-handleUpdate :: (MonadLog m, MonadError ServerError m, MonadConfig m) => Maybe String -> String -> m NoContent
+updateProc :: IO ()
+updateProc = do
+  readCreateProcess (shell "./restart.sh") ""
+  return ()
+
+handleUpdate :: (MonadLog m, MonadError ServerError m, MonadConfig m, MonadLog m) => Maybe String -> String -> m NoContent
 handleUpdate (Just sig) body = do
   secret <- getSecret
   let dataSig = TT.unpack $ encodeHex $ hmaclazy secret (pack body)
   if sig /= ("sha256=" ++ dataSig)
     then throwError $ err403 { errBody = "Incorrect signature" }
     else do
+      liftIO $ async $ updateProc
       logT "Updating application"
-      out <- liftIO $ readCreateProcess (shell "nohup ./restart.sh &") ""
-      logT ("Result: " ++ out)
       return NoContent
 handleUpdate Nothing body = throwError $ err403 { errBody = "Incorrect signature" }

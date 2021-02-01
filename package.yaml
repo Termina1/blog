@@ -55,6 +55,7 @@ dependencies:
 - aeson
 - hex-text
 - process
+- async
 
 library:
   source-dirs: src
