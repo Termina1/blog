@@ -25,8 +25,8 @@ class ToRSS a where
 
 instance Accept RSS where
   contentTypes _ =
-      "application" M.// "atom+xml" M./: ("charset", "utf-8") NE.:|
-      [ "application" M.// "atom+xml" ]
+      "application" M.// "rss+xml" M./: ("charset", "utf-8") NE.:|
+      [ "application" M.// "rss+xml" ]
 
 instance (ToRSS a) => MimeRender RSS a where
     mimeRender _ = fromStrict . encodeUtf8 . pack . R.showXML . R.rssToXML . toRss
