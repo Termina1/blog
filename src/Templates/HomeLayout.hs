@@ -17,21 +17,21 @@ import Data.String
 render :: ContextEnv -> Markup -> Html
 render env value = docTypeHtml $ do
   H.head $ do
-    H.title $ fromString $ (blogName $ blogEnv env)
+    H.title $ fromString (blogName $ blogEnv env)
     H.link ! A.rel "stylesheet" ! href "https://cdn.jsdelivr.net/npm/modern-css-reset/dist/reset.min.css"
     H.link ! A.rel "stylesheet" ! href "https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap"
-    H.link ! A.rel "stylesheet" ! href "/assets/style.css"
+    H.link ! A.rel "stylesheet" ! href "/assets/style.css?1"
     H.link ! A.rel "alternate" ! A.type_ "application/rss+xml" ! A.title "Soft Decay RSS" ! href "/rss"
     H.meta ! A.name "viewport" ! content "width=device-width, initial-scale=1"
 
-  body $ do
+  body $
     H.div ! class_ "container" $ do
-      generateSprite
-      header $ do
-        H.div $ do
-          H.menu ! class_ "top-menu" $ do
-            li ! class_ "top-menu__item" $ a ! href (showLink (senv env) aboutLink) $ "Обо мне"
-            li ! class_ "top-menu__item" $ a ! href (showLink (senv env) homeLink) $ "Блог"
-            li ! class_ "top-menu__item" $ a ! href (showLink (senv env) rssLink) $ "RSS"
-        h1 $ a ! href (showLink (senv env) homeLink) $ fromString $ "<" ++ (blogName $ blogEnv env) ++ ">"
-      H.div ! class_ "content" $ value
+    generateSprite
+    header $ do
+      H.div $ do
+        H.menu ! class_ "top-menu" $ do
+          li ! class_ "top-menu__item" $ a ! href (showLink (senv env) aboutLink) $ "Обо мне"
+          li ! class_ "top-menu__item" $ a ! href (showLink (senv env) homeLink) $ "Блог"
+          li ! class_ "top-menu__item" $ a ! href (showLink (senv env) rssLink) $ "RSS"
+      h1 $ a ! href (showLink (senv env) homeLink) $ fromString $ "<" ++ (blogName $ blogEnv env) ++ ">"
+    H.div ! class_ "content" $ value
