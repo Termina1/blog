@@ -22,6 +22,7 @@ render env value = docTypeHtml $ do
     H.link ! A.rel "stylesheet" ! href "https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap"
     H.link ! A.rel "stylesheet" ! href "/assets/style.css"
     H.link ! A.rel "alternate" ! A.type_ "application/rss+xml" ! A.title "Soft Decay RSS" ! href "/rss"
+    H.meta ! A.name "viewport" ! content "width=device-width, initial-scale=1"
 
   body $ do
     H.div ! class_ "container" $ do

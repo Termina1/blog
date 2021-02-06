@@ -8,6 +8,13 @@ body {
   line-height: 1.5rem;
 }
 
+@media only screen
+  and (max-device-width: 480px) {
+    :root {
+      font-size: 18px;
+    }
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -16,6 +23,7 @@ a {
 .container {
   max-width: 800px;
   margin: auto;
+  padding: 0 20px;
 }
 
 .container > header {
@@ -41,6 +49,12 @@ a {
 
 .note-item .note-item__preview {
   font-weight: 300;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
 }
 
 .note-item .note-item__preview pre {
@@ -97,6 +111,7 @@ a {
 .note-item .note-item__title {
   font-size: 1.5rem;
   margin: 0;
+  line-height: 1.2;
 }
 
 .note-item.note-item_full .note-item__title {
