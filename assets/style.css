@@ -8,13 +8,6 @@ body {
   line-height: 1.5rem;
 }
 
-@media only screen
-  and (max-device-width: 480px) {
-    :root {
-      font-size: 18px;
-    }
-}
-
 a {
   text-decoration: none;
   color: inherit;
@@ -31,6 +24,27 @@ a {
   line-height: 3rem;
   margin-top: 1.5rem;
   margin-bottom: 3rem;
+}
+
+
+@media only screen
+  and (max-device-width: 480px) {
+    :root {
+      font-size: 18px;
+    }
+
+    :root .top-menu .top-menu__item {
+      margin: 0 15px
+    }
+
+    .content .note-item.note-item_full .note-item__title {
+      font-size: 1.8rem;
+    }
+
+    .container > header h1 {
+      font-size: 2rem;
+    }
+
 }
 
 .note-item {
