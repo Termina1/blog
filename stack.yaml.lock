@@ -32,6 +32,13 @@ packages:
       sha256: 24661ef9b1089d468227300f8ceb89194b5cce68b9f6ed8109b01f63c07f54e3
   original:
     hackage: base16-bytestring-1.0.1.0@sha256:33b9d57afa334d06485033e930c6b13fc760baf88fd8f715ae2f9a4b46e19a54,2641
+- completed:
+    hackage: rss-3000.2.0.7@sha256:1afcc4ac78372abf96dbf16ef8254dab4483302336b298be6f3a3cc0a5738162,1750
+    pantry-tree:
+      size: 151
+      sha256: ab863735971970ee2fea54c50ce775742934067dcbb052642c6ca8d3aa2bafaf
+  original:
+    hackage: rss-3000.2.0.7@sha256:1afcc4ac78372abf96dbf16ef8254dab4483302336b298be6f3a3cc0a5738162,1750
 snapshots:
 - completed:
     size: 534126

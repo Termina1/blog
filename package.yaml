@@ -41,7 +41,7 @@ dependencies:
 - mmark
 - text
 - http-media
-- feed
+- rss
 - bytestring
 - network-uri
 - megaparsec

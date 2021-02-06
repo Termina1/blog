@@ -1,8 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.34.2.
+-- This file has been generated from package.yaml by hpack version 0.33.0.
 --
 -- see: https://github.com/sol/hpack
+--
+-- hash: c50966a3971f4663f57ce28d0d1e3bbe41cf5d33f5708d1764dd56389e88382f
 
 name:           nblog
 version:        0.1.0.0
@@ -64,7 +66,6 @@ library
     , directory
     , exceptions
     , fast-logger
-    , feed
     , filepath
     , friendly-time
     , hedis
@@ -79,6 +80,7 @@ library
     , network-uri
     , process
     , replace-megaparsec
+    , rss
     , servant
     , servant-blaze
     , servant-server
@@ -111,7 +113,6 @@ executable nblog-exe
     , directory
     , exceptions
     , fast-logger
-    , feed
     , filepath
     , friendly-time
     , hedis
@@ -127,6 +128,7 @@ executable nblog-exe
     , network-uri
     , process
     , replace-megaparsec
+    , rss
     , servant
     , servant-blaze
     , servant-server
