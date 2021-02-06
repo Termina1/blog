@@ -19,6 +19,9 @@ import Data.List
 import Data.Time.Format.ISO8601 (iso8601Show)
 import Text.Blaze.Html.Renderer.Text (renderHtml)
 
+showUri :: ContextEnv -> URI -> String
+showUri env uri = show $ absoluteURI (senv env) uri
+
 class ToMarkupWithContext a where
   toMarkupWithContext :: ContextEnv -> a -> Markup
 
@@ -32,9 +35,10 @@ toEntry :: ContextEnv -> Note -> Item
 toEntry env note = [
     Title (title note),
     Link (absoluteURI (senv env) (articleToLink note)),
-    Author (email (authorEnv env)),
+    Author (email (authorEnv env) ++ " (" ++ authorName (authorEnv env) ++ ")") ,
     PubDate (created note),
-    Description (unpack $ renderHtml $ fullText note)
+    Description (unpack $ renderHtml $ fullText note),
+    Guid True (showUri env (articleToLink note))
   ]
 
 instance ToRSS (Context [Note]) where
